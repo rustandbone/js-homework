@@ -5,33 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/node.js" defer></script>
+    <script src="./js/attr.js" defer></script>
     <script src="./js/data.js" defer></script>
     <script src="./js/main.js" defer></script>
     <title>Elemental Movie Poster</title>
   </head>
-  <body>
+  <body class="posterBody">
     <div class="container">
       <h1 class="nickName">EMBER</h1>
       <div class="visual">
-        <div><img src="./assets/ember.jpeg" alt="엠버 포스터" /></div>
+        <div>
+          <img
+            src="./assets/ember.jpeg"
+            class="visual__img"
+            alt="엠버 포스터"
+          />
+        </div>
+        <audio
+          src="./assets/audio/ember.m4a"
+          class="visual__audio"
+          controls
+        ></audio>
       </div>
 
       <nav class="nav">
-        <ul>
-          <li class="is-active" data-index="1">
+        <ul class="character">
+          <li class="character__li" data-index="1">
             <button><img src="./assets/ember.jpeg" alt="엠버 포스터" /></button>
           </li>
-          <li data-index="2">
+          <li data-index="2" class="character__li">
             <button>
               <img src="./assets/wade.jpeg" alt="웨이드 포스터" />
             </button>
           </li>
-          <li data-index="3">
+          <li data-index="3" class="character__li">
             <button>
               <img src="./assets/clod.jpeg" alt="클로드 포스터" />
             </button>
           </li>
-          <li data-index="4">
+          <li data-index="4" class="character__li">
             <button><img src="./assets/gale.jpeg" alt="게일 포스터" /></button>
           </li>
         </ul>
