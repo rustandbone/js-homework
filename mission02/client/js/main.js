@@ -7,45 +7,75 @@
 */
 
 const navigation = document.querySelector(".nav");
-const list = document.querySelectorAll(".nav li");
-const visualImage = document.querySelector(".visual img");
-const char = document.querySelector(".nickName");
-const body = document.querySelector("body");
 
 function handleSlider(e) {
   e.preventDefault();
-
+  const list = document.querySelectorAll(".character__li");
+  const visualImage = document.querySelector(".visual__img");
+  const sound = document.querySelector(".visual__audio");
+  const char = document.querySelector(".nickName");
+  const body = document.querySelector(".posterBody");
   const target = e.target.closest("li");
   const index = target.getAttribute("data-index");
   const dataSet = data[index - 1];
 
   if (!target) return;
 
-  list.forEach((li) => li.classList.remove("is-active"));
-
+  classReset(list, "is-active");
   target.classList.add("is-active");
 
-  visualImage.setAttribute("src", `./assets/${dataSet.name}.jpeg`);
-  visualImage.setAttribute("alt", `${dataSet.alt}`);
-
-  char.textContent = dataSet.name;
-
-  body.style.background = `linear-gradient(to bottom, ${dataSet.color[0]}, ${dataSet.color[1]})`;
+  setTest(visualImage, { src: dataSet.name, alt: dataSet.alt });
+  setTest(sound, { src: dataSet.name });
+  setNameText(char, dataSet.name);
+  // setBgcolor(body, dataSet.color);
+  setBgcolor(body, dataSet.color, dataSet.color);
 }
 
 navigation.addEventListener("click", handleSlider);
 
-function setBgcolor(node, value) {
-  node.style.background = `linear-gradient(to bottom, ${value.color[0]}, ${value.color[1]})`;
+function classReset(node, className) {
+  node.forEach((item) => item.classList.remove(className));
 }
 
-function setImage(node, attr, value) {
-  if (attr === "src") {
-    return node.setAttribute(attr, `./assets/${value}.jpeg`);
+// function setBgcolor(node, value) {
+//   node.style.background = `linear-gradient(to bottom, ${value[0]}, ${value[1]})`;
+// }
+
+function setBgcolor(node, colorA, colorB = "#000") {
+  colorA = colorA[0];
+  colorB = colorB[1];
+  // if (style === "gradient") {
+  node.style.background = `linear-gradient(to bottom, ${colorA}, ${colorB})`;
+  // }
+  // node.style.background = colorB;
+}
+
+function setTest(node, attr) {
+  const imgSrc = `./assets/${attr.src}.jpeg`;
+  const audioSrc = `./assets/audio/${attr.src}.m4a`;
+  const attrSrc = Object.keys(attr).find((key) => key === "src");
+  const attrAlt = Object.keys(attr).find((key) => key === "alt");
+
+  if (node.tagName === "IMG") {
+    node.setAttribute(attrAlt, attr.alt);
+    return node.setAttribute(attrSrc, imgSrc);
+  } else if (node.tagName === "AUDIO") {
+    return node.setAttribute(attrSrc, audioSrc);
+  }
+}
+
+function setContent(node, attr, value) {
+  const imgSrc = `./assets/${value}.jpeg`;
+  const audioSrc = `./assets/audio/${value}.m4a`;
+
+  if (node.tagName === "IMG" && attr === "src") {
+    return node.setAttribute(attr, imgSrc);
+  } else if (node.tagName === "AUDIO" && attr === "src") {
+    return node.setAttribute(attr, audioSrc);
   }
   node.setAttribute(attr, value);
 }
 
 function setNameText(node, value) {
-  node.textContent = value.name;
+  node.textContent = value;
 }
