@@ -1,4 +1,4 @@
-const data = [
+export const data = [
   {
     color: ["#ff6a00", "#720400"],
     name: "EMBER",

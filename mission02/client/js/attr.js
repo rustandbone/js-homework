@@ -1,16 +1,16 @@
 function getAttr(node, property) {
-  if (typeof node === 'string') {
-    node = getNode(node);
+  if (typeof node === "string") {
+    node = node(node);
   }
   return node.getAttribute(property);
 }
 
 function setAttr(node, property, value) {
-  if (typeof node === 'string') {
-    node = getNode(node);
+  if (typeof node === "string") {
+    node = node(node);
   }
 
-  if (!node[property] && property !== 'class' && property !== 'title') {
+  if (!node[property] && property !== "class" && property !== "title") {
     node.dataset[property] = value;
     return;
   }
@@ -18,7 +18,7 @@ function setAttr(node, property, value) {
   node.setAttribute(property, value);
 }
 
-function attr(node, prop, value) {
+export function attr(node, prop, value) {
   if (!value) {
     return getAttr(node, prop);
   } else {
